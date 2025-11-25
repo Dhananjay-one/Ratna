@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>For-Ratna</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1:#fff0f8;
+      --bg2:#e8f7ff;
+      --accent:#ff2d7a;
+      --accent-2:#ff83c7;
+      --muted:#5a5a5a;
+    }
+    *{box-sizing:border-box}
+    html,body{
+      height:100%;margin:0;font-family:Poppins,Arial; 
+      background:linear-gradient(135deg,var(--bg1),var(--bg2));
+    }
+    .stage{
+      height:100vh; width:100vw; display:flex; 
+      align-items:center; justify-content:center; 
+      position:relative; overflow:hidden;
+    }
+
+.glow{position:absolute; border-radius:50%; filter:blur(80px); opacity:0.28;}
+.g1{width:420px;height:420px;background:radial-gradient(circle,#ffd7ef,transparent 40%);left:-80px;top:-60px}
+.g2{width:520px;height:520px;background:radial-gradient(circle,#d8f3ff,transparent 40%);right:-120px;bottom:-100px}
+
+.card{
+  width:min(920px,94%);
+  max-width:1100px;
+  height:min(680px,86vh);
+  background:linear-gradient(180deg,rgba(255,255,255,0.92),rgba(255,255,255,0.85));
+  border-radius:28px;
+  box-shadow:0 30px 80px rgba(20,20,50,0.12);
+  display:flex; gap:24px; padding:28px; align-items:center; position:relative;
+  flex-wrap:nowrap;
+}
+
+.left{flex:1; display:flex; justify-content:center; align-items:center; transform:translateX(-12px);}
+.balloon-bunch{
+  width:100%;
+  max-width:520px;
+  height:auto;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto;
+}
+#balloonMain{
+  width:72%;
+  max-width:420px;
+  height:auto;
+  display:block;
+  object-fit:contain;
+  filter: drop-shadow(0 20px 40px rgba(160,120,160,0.07));
+}
+
+.right{flex:1; padding:16px; display:flex; flex-direction:column;}
+.badge{
+  font-family:Merienda; color:var(--accent); 
+  background:rgba(255,45,122,0.08); padding:8px 14px; border-radius:18px;
+}
+
+h1{
+  font-family:Merienda; font-size:3.1rem; color:var(--accent-2); margin:16px 0 6px;
+}
+
+/* Ratna RIGHT SHIFT */
+.name-word{
+  display:inline-block;
+  transform: translateX(14px);
+}
+
+.subtitle{font-size:1.05rem; color:var(--muted); margin-bottom:18px;}
+
+.action-row{
+  display:flex;
+  gap:20px;
+  align-items:flex-start;
+  flex-wrap:wrap;
+}
+
+.cute-click{
+  margin-top:6px;
+  text-align:center;
+  font-size:0.9rem;
+  color:var(--accent);
+  font-weight:700;
+}
+
+.btn{
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  color:white; padding:12px 18px;
+  border-radius:24px; border:2px solid var(--accent-2);
+  font-weight:600; cursor:pointer;
+  box-shadow:0 0 14px rgba(255,130,180,0.45);
+  transition:.25s ease;
+}
+
+.btn.secondary{
+  background:transparent;
+  color:var(--accent-2);
+  border:2px solid var(--accent-2);
+}
+
+#confettiCanvas{
+  position:absolute; left:0; top:0; width:100%; height:100%; pointer-events:none;
+  z-index:10;
+}
+
+@media (max-width: 600px) {
+  .card{
+    flex-direction:column;
+    height:auto;
+    padding:18px;
+    gap:14px;
+  }
+
+  .left, .right{
+    width:100%;
+    flex:unset;
+    transform:none;
+    display:block;
+    padding:0;
+  }
+
+  .balloon-bunch{
+    max-width:480px;
+    width:88%;
+    height:auto;
+    margin:6px auto 8px;
+  }
+  #balloonMain{
+    width:92%;
+    max-width:520px;
+  }
+
+  h1{ font-size:2rem; text-align:center; margin-top:8px; }
+  .name-word{ transform:translateX(12px); }
+
+  .subtitle{ text-align:center; font-size:0.95rem; padding:0 6px; }
+  .action-row{ justify-content:center; gap:12px; margin-top:6px; }
+  .popup-img{ max-height:200px; }
+  footer{ font-size:0.85rem; padding-bottom:6px; }
+}
+
+@media (max-width:360px){
+  #balloonMain{ width:94%; max-width:420px; }
+  h1{ font-size:1.6rem; }
+  .btn{ padding:10px 14px; font-size:0.95rem; }
+  .name-word{ transform: translateX(8px); }
+}
+  </style>
+</head>
+
+<body>
+
+<audio id="bgSong" src="sandbox:/mnt/data/theuned_happy-birthday-crowd(chosic.com).mp3"></audio>
+
+<div class="stage">
+  <div class="glow g1"></div>
+  <div class="glow g2"></div>
+
+<div class="card">
+
+  <canvas id="confettiCanvas"></canvas>
+
+  <div class="left">
+    <div class="balloon-bunch">
+      <img id="balloonMain" src="https://i.ibb.co/xStdx3Wx/pngtree-pink-balloons-png-image-15518155.png" alt="balloons">
+    </div>
+  </div>
+
+  <div class="right">
+
+    <div class="badge">For Ratna</div>
+
+    <h1>Happy Birthday <span class="name-word" style="color:var(--accent)">Ratna</span> 🎀</h1>
+
+    <div class="subtitle">May your day sparkle with smiles, hugs and sweet surprises ✨</div>
+
+    <div class="action-row">
+
+      <div style="display:flex; flex-direction:column; align-items:center;">
+        <button class="btn secondary" id="confettiBtn">Celebrate🎀</button>
+        <div class="cute-click">Click ↑</div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; align-items:center;">
+        <button class="btn secondary" id="msgBtn">Moments🎀</button>
+        <div class="cute-click">Click ↑</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+</div>
+
+<footer style="position:fixed; bottom:10px; width:100%; text-align:center; color:var(--muted); font-size:0.9rem;">
+  from Dhananjay to Chhipakalee
+</footer>
+
+<script>
+(function(){
+
+const canvas = document.getElementById("confettiCanvas");
+const ctx = canvas.getContext("2d");
+
+let W, H, confetti = [], anim;
+
+function resize(){
+  const rect = canvas.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  canvas.style.width = rect.width+"px";
+  canvas.style.height = rect.height+"px";
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  W = rect.width;
+  H = rect.height;
+}
+
+const colors = ["#ff2d7a","#ffcc00","#00eaff","#b435ff","#ff7ab4"];
+
+function rand(a,b){ return Math.random()*(b-a)+a; }
+
+/* CONFETTI — QUANTITY INCREASED (900) + SLOW SPEED */
+function spawnPremiumConfetti(count=900){
+  // mobile limit increased so phones also get denser confetti
+  const limit = Math.min(count, window.innerWidth < 480 ? 380 : count);
+
+  for(let i=0;i<limit;i++){
+    confetti.push({
+      x: rand(0, W),
+      y: rand(-H, 0),
+      w: rand(4,8),
+      h: rand(10,18),
+      /* slow gentle fall */
+      vy: rand(1.0,2.6),   /* slightly slower to feel gentle */
+      vx: rand(-1.5,1.5),
+      rot: rand(0, Math.PI*2),
+      spin: rand(-0.12,0.12),
+      color: colors[Math.floor(rand(0, colors.length))]
+    });
+  }
+
+  if(!anim) animate();
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+
+  for(const p of confetti){
+    p.x += p.vx;
+    p.y += p.vy;
+    p.rot += p.spin;
+
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot);
+
+    const scaleY = Math.sin(p.rot * 2) * 0.6 + 0.4;
+
+    ctx.fillStyle = p.color;
+    ctx.fillRect(-p.w/2, -p.h/2 * scaleY, p.w, p.h * scaleY);
+
+    ctx.restore();
+  }
+
+  confetti = confetti.filter(p => p.y < H+40);
+}
+
+function animate(){
+  anim = requestAnimationFrame(animate);
+  draw();
+}
+
+/* ----- POPUP: image fills popup width and centered (keeps equal left/right white gap) ----- */
+function popup(){
+  if(document.getElementById('memoryPopupOverlay')) return;
+
+  const overlay=document.createElement('div');
+  overlay.id='memoryPopupOverlay';
+  overlay.style.position='fixed';
+  overlay.style.left=0; overlay.style.top=0;
+  overlay.style.right=0; overlay.style.bottom=0;
+  overlay.style.background='rgba(0,0,0,0.45)';
+  overlay.style.display='flex';
+  overlay.style.alignItems='center';
+  overlay.style.justifyContent='center';
+  overlay.style.zIndex=9999;
+
+  const box=document.createElement('div');
+  box.style.width='min(500px,90%)';
+  box.style.background='linear-gradient(180deg,#fff,#fffaf7)';
+  box.style.borderRadius='20px';
+  box.style.padding='20px 22px';
+  box.style.boxShadow='0 20px 60px rgba(0,0,0,0.2)';
+  box.style.textAlign='left';
+  box.style.overflow = 'hidden'; // ensure tidy edges
+
+  const img=document.createElement('img');
+  img.className='popup-img';
+
+  /* make the image fill the popup's inner width and be centered;
+     this ensures any left padding/right padding from the box remain symmetrical */
+  img.style.display = 'block';
+  img.style.width = '100%';      // fills available inner width (so left/right gaps equal)
+  img.style.height = 'auto';
+  img.style.objectFit = 'cover'; // keeps nice crop if needed
+  img.style.margin = '0 auto';
+  img.src='https://i.ibb.co/C3snT4gS/IMG-20251121-164441.jpg';
+
+  const note=document.createElement('p');
+  note.innerHTML = `Dear chhipakalee🤡🎀🎂<br>our happiest moments yaad hai☺️🤌🏻🧿`;
+
+  const close=document.createElement('button');
+  close.textContent='Close';
+  close.style.marginTop='12px';
+  close.style.padding='10px 14px';
+  close.style.borderRadius='12px';
+  close.style.border='0';
+  close.style.background='linear-gradient(90deg,#ff2d7a,#ff83c7)';
+  close.style.color='white';
+  close.onclick=()=>overlay.remove();
+
+  box.appendChild(img);
+  box.appendChild(note);
+  box.appendChild(close);
+  overlay.appendChild(box);
+
+  overlay.addEventListener('click',e=>{
+    if(e.target===overlay) overlay.remove();
+  });
+
+  document.body.appendChild(overlay);
+}
+
+function handlers(){
+  document.getElementById("confettiBtn").onclick = ()=>{
+    spawnPremiumConfetti(900);
+
+    const song = document.getElementById("bgSong");
+    if(song){ song.volume=1; song.play().catch(()=>{}); }
+  };
+
+  document.getElementById("msgBtn").onclick = popup;
+}
+
+window.addEventListener('load',()=>{
+  resize();
+  handlers();
+});
+window.addEventListener('resize',()=>setTimeout(resize,80));
+
+})();
+</script>
+
+</body>
+</html>
